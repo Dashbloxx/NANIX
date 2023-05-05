@@ -1,0 +1,2 @@
+kernel:
+	make -C kernel
