@@ -9,7 +9,6 @@ kheap_segment_t *kheap_head = NULL;
 
 int kheap_initialize(void *start_address, void *end_address) {
 	if(start_address > end_address) {
-		kprintf("Failed to initialize kernel heap...\n");
 		return -1;
 	}
 
