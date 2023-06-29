@@ -11,7 +11,7 @@ int main(multiboot_header_t *multiboot_pointer) {
 	kclrscr();
 	kprintf("NANIX (C) %s, All Rights Reserved.\nBuild compiled during %s.\n", "2023", __DATE__);
 
-	switch(kheap_initialize((void *)multiboot_pointer->mmap_address, (void *)(multiboot_pointer->mmap_address + multiboot_pointer->mmap_length))) {
+	/*switch(kheap_initialize((void *)0, (void *)0)) {
 	case -1:
 		kprintf("Failed to initialize kernel heap...\n");
                 goto __end__;
@@ -25,7 +25,7 @@ int main(multiboot_header_t *multiboot_pointer) {
 		goto __end__;
 	default:
 		kprintf("Successfully initialized the filesystem!\n");
-	}
+	}*/
 
 	/*
 	 *	Let's set the initrd values of mapped_memory, which is a
