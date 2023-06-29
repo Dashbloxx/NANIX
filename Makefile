@@ -13,7 +13,7 @@ OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(C_FILES))
 ASM_FILES := $(wildcard $(SRC_DIR)/*.S)
 ASM_OBJ_FILES := $(patsubst $(SRC_DIR)/%.S, $(OBJ_DIR)/%.o, $(ASM_FILES))
 
-all: kern
+all: kernel.bin
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -21,7 +21,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.S
 	$(AS) --32 $< -o $@
 
-kern: $(OBJ_FILES) $(ASM_OBJ_FILES)
+kernel.bin: $(OBJ_FILES) $(ASM_OBJ_FILES)
 	$(LD) $(LDFLAGS) $^ -o $@
 
 clean:
