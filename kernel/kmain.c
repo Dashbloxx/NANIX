@@ -4,10 +4,14 @@
 #include "multiboot.h"
 #include "gdt.h"
 #include "serial.h"
+#include "tty.h"
 
 mapped_memory_t mapped_memory;
+extern tty_t current_tty;
 
 int main(multiboot_header_t *multiboot_pointer) {
+	current_tty = tty0;
+
 	kclrscr();
 	kprintf("NANIX (C) %s, All Rights Reserved.\nCompiled during %s.\n", "2023", __DATE__);
 
