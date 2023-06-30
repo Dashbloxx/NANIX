@@ -1,11 +1,12 @@
-CC = gcc
-LD = ld
-AS = as
-CFLAGS = -nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32
-LDFLAGS = -Tlinker.ld -m elf_i386
+CC := gcc
+LD := ld
+AS := as
+SH := bash
+CFLAGS := -nostdlib -nostdinc -fno-builtin -fno-stack-protector -m32
+LDFLAGS := -Tlinker.ld -m elf_i386
 
-SRC_DIR = kernel
-OBJ_DIR = $(SRC_DIR)
+SRC_DIR := kernel
+OBJ_DIR := $(SRC_DIR)
 
 C_FILES := $(wildcard $(SRC_DIR)/*.c)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(C_FILES))

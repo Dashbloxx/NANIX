@@ -1,31 +1,30 @@
 #include "kio.h"
-#include "kheap.h"
-#include "fs.h"
 #include "def.h"
 #include "str.h"
 #include "multiboot.h"
+#include "gdt.h"
+#include "serial.h"
 
 mapped_memory_t mapped_memory;
 
 int main(multiboot_header_t *multiboot_pointer) {
 	kclrscr();
-	kprintf("NANIX (C) %s, All Rights Reserved.\nBuild compiled during %s.\n", "2023", __DATE__);
+	kprintf("NANIX (C) %s, All Rights Reserved.\nCompiled during %s.\n", "2023", __DATE__);
 
-	/*switch(kheap_initialize((void *)0, (void *)0)) {
-	case -1:
-		kprintf("Failed to initialize kernel heap...\n");
-                goto __end__;
-	default:
-		kprintf("Successfully initialized kernel heap!\n");
-	}
+	/*
+	 *	Initialize the GDT (Global Descriptor Table), which is an x86-specific thing
+	 *	which allows us to place specific permission properties to different segments
+	 *	of memory...
+	 */
+	gdt_initialize();
 
-	switch(fs_initialize()) {
+	switch(serial_initialize(com1)) {
 	case -1:
-		kprintf("Failed to initialize filesystem...\n");
+		kprintf("Failed to initialize serial driver...\n");
 		goto __end__;
 	default:
-		kprintf("Successfully initialized the filesystem!\n");
-	}*/
+		kprintf("Successfully initialized serial driver...\n");
+	}
 
 	/*
 	 *	Let's set the initrd values of mapped_memory, which is a
